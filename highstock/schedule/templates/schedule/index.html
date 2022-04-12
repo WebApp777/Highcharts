@@ -1,0 +1,298 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <script src="{% static 'js/highstock.js' %}"></script>
+    <script src="{% static 'js/exporting.js' %}"></script>
+    <script src="{% static 'js/export-data.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/style.css'%}" type="text/css">
+    <title>Графики</title>
+</head>
+<body>
+
+    <h1>Графики</h1>
+    <div class="box">
+        <div id="container"></div>
+        <div id="container2"></div>
+    </div>
+    <div class="box">
+        <div id="container3"></div>
+        <div id="container4"></div>
+    </div>
+
+<!--  График 1  -->
+<script>
+    // Create the chart
+Highcharts.stockChart('container', {
+  chart: {
+    events: {
+      load: function () {
+
+        // set up the updating of the chart each second
+        var series = this.series[0];
+        setInterval(function () {
+          var x = (new Date()).getTime() // current time
+          var y = {{graph}} * 100;
+          series.addPoint([x, y], true, true);
+        }, 1000);
+      }
+    }
+  },
+
+  time: {
+    useUTC: false
+  },
+
+  rangeSelector: {
+    buttons: [{
+      count: 1,
+      type: 'minute',
+      text: '1M'
+    }, {
+      count: 5,
+      type: 'minute',
+      text: '5M'
+    }, {
+      type: 'all',
+      text: 'All'
+    }],
+    inputEnabled: true,
+    selected: 0
+  },
+
+  title: {
+    text: 'Graph'
+  },
+
+  exporting: {
+    enabled: true  <!--дополнительный функционал-->
+  },
+
+  series: [{
+    name: 'Random data',
+    data: (function () {
+      // generate an array of random data
+      var data = [],
+        time = (new Date()).getTime(),
+        i;
+
+      for (i = -999; i <= 0; i += 1) {
+        data.push([
+          time + i * 1000,
+          Math.round(Math.random() * 100)
+        ]);
+      }
+      return data;
+    }())
+  }]
+});
+</script>
+
+<!--  График 2  -->
+<script>
+    // Create the chart
+Highcharts.stockChart('container2', {
+  chart: {
+    events: {
+      load: function () {
+
+        // set up the updating of the chart each second
+        var series = this.series[0];
+        setInterval(function () {
+          var x = (new Date()).getTime(), // current time
+            y = Math.round({{graph1}} * 100);
+          series.addPoint([x, y], true, true);
+        }, 1000);
+      }
+    }
+  },
+
+  time: {
+    useUTC: false
+  },
+
+  rangeSelector: {
+    buttons: [{
+      count: 1,
+      type: 'minute',
+      text: '1M'
+    }, {
+      count: 5,
+      type: 'minute',
+      text: '5M'
+    }, {
+      type: 'all',
+      text: 'All'
+    }],
+    inputEnabled: false,
+    selected: 0
+  },
+
+  title: {
+    text: 'Live random data'
+  },
+
+  exporting: {
+    enabled: false
+  },
+
+  series: [{
+    name: 'Random data',
+    data: (function () {
+      // generate an array of random data
+      var data = [],
+        time = (new Date()).getTime(),
+        i;
+
+      for (i = -999; i <= 0; i += 1) {
+        data.push([
+          time + i * 1000,
+          Math.round(Math.random() * 100)
+        ]);
+      }
+      return data;
+    }())
+  }]
+});
+</script>
+
+<!--  График 3  -->
+<script>
+    // Create the chart
+Highcharts.stockChart('container3', {
+  chart: {
+    events: {
+      load: function () {
+
+        // set up the updating of the chart each second
+        var series = this.series[0];
+        setInterval(function () {
+          var x = (new Date()).getTime(), // current time
+            y = Math.round({{graph2}} * 100);
+          series.addPoint([x, y], true, true);
+        }, 1000);
+      }
+    }
+  },
+
+  time: {
+    useUTC: false
+  },
+
+  rangeSelector: {
+    buttons: [{
+      count: 1,
+      type: 'minute',
+      text: '1M'
+    }, {
+      count: 5,
+      type: 'minute',
+      text: '5M'
+    }, {
+      type: 'all',
+      text: 'All'
+    }],
+    inputEnabled: false,
+    selected: 0
+  },
+
+  title: {
+    text: 'Live random data'
+  },
+
+  exporting: {
+    enabled: false
+  },
+
+  series: [{
+    name: 'Random data',
+    data: (function () {
+      // generate an array of random data
+      var data = [],
+        time = (new Date()).getTime(),
+        i;
+
+      for (i = -999; i <= 0; i += 1) {
+        data.push([
+          time + i * 1000,
+          Math.round(Math.random() * 100)
+        ]);
+      }
+      return data;
+    }())
+  }]
+});
+</script>
+
+<!--  График 4  -->
+<script>
+    // Create the chart
+Highcharts.stockChart('container4', {
+  chart: {
+    events: {
+      load: function () {
+
+        // set up the updating of the chart each second
+        var series = this.series[0];
+        setInterval(function () {
+          var x = (new Date()).getTime(), // current time
+            y = Math.round({{graph3}} * 100);
+          series.addPoint([x, y], true, true);
+        }, 1000);
+      }
+    }
+  },
+
+  time: {
+    useUTC: false
+  },
+
+  rangeSelector: {
+    buttons: [{
+      count: 1,
+      type: 'minute',
+      text: '1M'
+    }, {
+      count: 5,
+      type: 'minute',
+      text: '5M'
+    }, {
+      type: 'all',
+      text: 'All'
+    }],
+    inputEnabled: false,
+    selected: 0
+  },
+
+  title: {
+    text: 'Live random data'
+  },
+
+  exporting: {
+    enabled: false
+  },
+
+  series: [{
+    name: 'Random data',
+    data: (function () {
+      // generate an array of random data
+      var data = [],
+        time = (new Date()).getTime(),
+        i;
+
+      for (i = -999; i <= 0; i += 1) {
+        data.push([
+          time + i * 1000,
+          Math.round(Math.random() * 100)
+        ]);
+      }
+      return data;
+    }())
+  }]
+});
+</script>
+
+</body>
+</html>

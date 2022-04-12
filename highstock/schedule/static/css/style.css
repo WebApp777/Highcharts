@@ -1,0 +1,16 @@
+#container,
+#container2,
+#container3,
+#container4 {
+    display: flex;
+    height: 300px;
+    width: 510px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    border: solid 2px #000000
+    }
+
+.box {
+   display: flex;
+   justify-content: flex-start;
+   }
