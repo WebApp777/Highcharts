@@ -7,11 +7,12 @@
     <script src="{% static 'js/highstock.js' %}"></script>
     <script src="{% static 'js/exporting.js' %}"></script>
     <script src="{% static 'js/export-data.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>Графики</title>
 </head>
 <body>
 
-    <h1>Графики {{graph}}</h1>
+    <h1 id="hh">Графики</h1>
     <div class="box">
         <div id="container"></div>
         <div id="container2"></div>
@@ -43,8 +44,19 @@
     }
     </style>
 
-<!--  График 1  -->
-<script>
+    <script>
+    let result = function() {
+        axios
+            .get('random_data')
+            .then((response) => {
+            console.log(response.data.graph);
+            })
+            .catch((error) => {
+            console.log(error);
+            });
+            }
+
+
     // Create the chart
 Highcharts.stockChart('container', {
   chart: {
@@ -54,7 +66,7 @@ Highcharts.stockChart('container', {
         var series = this.series[0];
         setInterval(function () {
           var x = (new Date()).getTime() // current time
-          var y = {{graph}};
+          let y = result();
           series.addPoint([x, y], true, true);
         }, 1000);
       },
@@ -125,7 +137,6 @@ Highcharts.setOptions( {
     }
 });
 </script>
-
 <!--  График 2  -->
 <script>
     // Create the chart

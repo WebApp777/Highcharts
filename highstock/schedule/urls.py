@@ -1,7 +1,8 @@
 from django.urls import path
-from . import views
+from .views import *
 
 
 urlpatterns = [
-    path('', views.index)
+    path('', index),
+    path('random_data', get_random_data)
 ]
